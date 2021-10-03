@@ -6,7 +6,14 @@ import { CreateBoardDto } from './dto/create-board.dto';
 @Injectable()
 export class BoardsService {
     // DB 대용 더미데이터
-    private boards: Board[] = [];
+    private boards: Board[] = [
+        {
+            id: '22167970-244e-11ec-bd0c-2116b9cd367c',
+            title: '안녕하세요',
+            description: 'ㅎㅎ',
+            status: BoardStatus.PUBLIC,
+        },
+    ];
 
     getAllBoards(): Board[] {
         return this.boards;
@@ -24,5 +31,9 @@ export class BoardsService {
 
         this.boards.push(board);
         return board;
+    }
+
+    getBoardById(id: string): Board {
+        return this.boards.find((board) => board.id === id);
     }
 }
