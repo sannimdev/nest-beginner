@@ -61,3 +61,30 @@
 -   interface나 class를 이용하여 정의될 수 있다. (NestJS에서는 Class를 이용하는 것을 권장한다.)
 -   데이터 유효성 체크할 때 사용한다.
 -   타입스크립트의 타입으로도 사용된다.
+
+## Pipe
+
+-   파이프는 `@Injectable` 데코레이터 주석이 달린 클래스이다
+-   파이프는 `데이터 변환(data transformation)`과 `데이터 검증(data validation)`을 위해 사용된다.
+    -   유효성 검사의 성공/실패 여부에 따라 다음 처리 메서드로 보내거나 오류를 발생시킬 수 있음
+-   파이프는 컨트롤러 경로 처리기에 의해 처리되는 인수에 대해 작동한다.
+-   Nest는 메서드가 호출되기 직전에 파이프를 삽입하고 파이프는 메서드로 향하는 인수를 수신하고 이에 대해 작동한다.
+
+### 파이프를 사용하는 방법
+
+1. Handler-level Pipes
+    - 핸들러 레벨에서 작동 `@UsePipes` 어노테이션
+2. Parameter-level Pipes
+    - 파라미터 레벨의 파이프이므로 특정 파라미터에만 적용되는 파이프이다.
+3. Global-level Pipes
+    - Application level의 파이프이다.
+    - 가장 상단 영역인 main.ts에 넣어주는 것이다.
+
+### Built-In Pipes
+
+-   ValidationPipe
+-   ParseIntPipe
+-   ParseBoolPipe
+-   ParseArrayPipe
+-   ParseUUIDPipe
+-   DefaultValuePipe
