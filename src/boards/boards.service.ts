@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { Board } from './board.model';
 
 @Injectable()
 export class BoardsService {
     // DB 대용 더미데이터
-    private boards = [];
+    private boards: Board[] = [];
 
-    getAllBoards() {
+    getAllBoards(): Board[] {
         return this.boards;
     }
 }
