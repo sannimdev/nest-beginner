@@ -88,3 +88,11 @@
 -   ParseArrayPipe
 -   ParseUUIDPipe
 -   DefaultValuePipe
+
+### 필요한 모듈
+
+```
+npm install class-validator, class-transformer
+```
+
+-   [유효성 확인과 관련된 사항 참고](https://github.com/typestack/class-validator#manual-validation)
