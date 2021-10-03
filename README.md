@@ -96,3 +96,30 @@ npm install class-validator, class-transformer
 ```
 
 -   [유효성 확인과 관련된 사항 참고](https://github.com/typestack/class-validator#manual-validation)
+
+### 커스텀 파이프 구현 방법
+
+-   PipeTransform이란 인터페이스를 새롭게 만들 커스텀 파이프에 구현해줘야 한다.
+-   그리고 이것과 함께 모든 파이프는 transform() 메서드가 필요하다.
+-   이 메서드는 NestJS가 인자(arguments)를 처리하기 위해서 사용된다.
+
+    ```ts
+    import { ArgumentMetadata, PipeTransform } from '@nestjs/common';
+
+    export class BoardStatusValidationPipe implements PipeTransform {
+        transform(value: any, metadatA: ArgumentMetadata) {
+            console.log('value', value);
+            console.log('metadata', metadata);
+
+            return value;
+        }
+    }
+    ```
+
+#### transform 메서드
+
+-   두 개의 파라미터를 가진다
+-   1번재 파라미터는 인잣값(value)
+-   두 번재 파라미터는 인자에 대한 메타 데이터를 포함한 객체이다.
+-   transform()메서드에서 returnm 된 값은 route 핸들러로 전해진다.
+-   exception이 발생하면 클라이언트로 바로 전해진다.
