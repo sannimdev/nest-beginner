@@ -2,6 +2,8 @@
 
 -   [따라하며 배우는 Nest.js](https://www.inflearn.com/course/%EB%94%B0%EB%9D%BC%ED%95%98%EB%8A%94-%EB%84%A4%EC%8A%A4%ED%8A%B8-%EC%A0%9C%EC%9D%B4%EC%97%90%EC%8A%A4/dashboard)
 
+-   Service ➡ Controller ➡ Repository
+
 ## Module
 
 -   App Module 안에 BoardModule과 AuthModule이 있으면 각 모듈 안에 Controller Entity Service 등이 있다.
@@ -150,3 +152,19 @@ db.query('SELECT * FROM boards WHERE title = "Hello" AND status = "PUBLIC', (err
 -   간단한 CLI 명령을 제공
 -   TypeORM은 간단한 코딩으로 ORM 프레임워크를 사용하기 쉽다.
 -   TypeORM은 다른 모듈과 쉽게 통합된다.
+
+### ORM 설치하기
+
+-   @nestjs/typeorm
+    -   NestJS에서 TypeORM을 사용하기 위해 연동시켜주는 모듈
+-   typeorm
+-   pg
+    -   Postgres 모듈
+
+```
+npm install pg typeorm @nestjs/typeorm --save
+```
+
+### Entity ?
+
+-   TypeORM을 사용할 때는 class를 데이터베이스 테이블로 변환해야 하므로 클래스를 생성하고 속성을 컬럼으로 정의하는 것이다.
