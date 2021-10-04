@@ -1,21 +1,17 @@
-import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    Param,
-    Post,
-    Put,
-    UsePipes,
-    ValidationPipe,
-} from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 
 @Controller('boards')
 export class BoardsController {
-    // constructor(private boardsService: BoardsService) {}
+    constructor(private boardsService: BoardsService) {}
+
+    @Get('/:id')
+    getBoardById(@Param('id') id: number): Promise<Board> {
+        return this.boardsService.getBoardById(id);
+    }
+
     // @Get('/')
     // getAllBoard(): Board[] {
     //     // 타입을 적극적으로 정의해서 다른 타입을 반환할 시 오류를 발생시켜 개발자가 알아차리게 해야 한다.
