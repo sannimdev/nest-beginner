@@ -168,3 +168,6 @@ npm install pg typeorm @nestjs/typeorm --save
 ### Entity ?
 
 -   TypeORM을 사용할 때는 class를 데이터베이스 테이블로 변환해야 하므로 클래스를 생성하고 속성을 컬럼으로 정의하는 것이다.
+
+-   `@EntityRepository`: 클래스를 사용자 정의(CUSTOM) 저장소로 선언하는 데 사용된다.
+-   사용자 지정 저장소는 일부 특정 엔티티를 관리하거나 일반 저장소일 수 있다.
