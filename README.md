@@ -123,3 +123,30 @@ npm install class-validator, class-transformer
 -   두 번재 파라미터는 인자에 대한 메타 데이터를 포함한 객체이다.
 -   transform()메서드에서 returnm 된 값은 route 핸들러로 전해진다.
 -   exception이 발생하면 클라이언트로 바로 전해진다.
+
+## ORM (Object Relational Mapping)
+
+-   객체와 관계형 데이터베이스의 데이터를 자도응로 변형하고 연결하는 작업을 수행한다.
+-   ORM을 이용한 개발은 객체와 데이터베이스의 변형에 유연하다.
+
+```js
+// ORM 사용
+const boards = Board.find({ title: 'Hello', status: 'PUBLIC' });
+
+// Pure Javascript Code
+db.query('SELECT * FROM boards WHERE title = "Hello" AND status = "PUBLIC', (err, result) => {
+    if (err) {
+        throw new Error('Error');
+    }
+    boards = result.rows;
+});
+```
+
+### 특징과 이점
+
+-   모델을 기반으로 데이터베이스 테이블 체계를 자동으로 생성
+-   데이터베이스에서 개체를 쉽게 삽입, 업데이트, 삭제가 가능함.
+-   테이블 간의 매핑(일대 일, 일대 다 및 다대 다)을 만듦.
+-   간단한 CLI 명령을 제공
+-   TypeORM은 간단한 코딩으로 ORM 프레임워크를 사용하기 쉽다.
+-   TypeORM은 다른 모듈과 쉽게 통합된다.
