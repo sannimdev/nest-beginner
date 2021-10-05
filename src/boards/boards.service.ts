@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Board } from './board.entity';
 import { BoardRepository } from './board.repository';
@@ -8,13 +8,12 @@ import { CreateBoardDto } from './dto/create-board.dto';
 export class BoardsService {
     constructor(@InjectRepository(BoardRepository) private boardRepository: BoardRepository) {}
 
-    async getBoardById(id: number): Promise<Board> {
-        const found = await this.boardRepository.findOne({ id });
-        if (!found) {
-            throw new NotFoundException(`Can't find board with id ${id}`);
-        }
+    async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+        return this.boardRepository.createBoard(createBoardDto);
+    }
 
-        return found;
+    async getBoardById(id: number): Promise<Board> {
+        return this.boardRepository.getBoardById(id);
     }
 
     // // DB 대용 더미데이터
