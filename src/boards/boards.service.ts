@@ -9,6 +9,10 @@ import { CreateBoardDto } from './dto/create-board.dto';
 export class BoardsService {
     constructor(@InjectRepository(BoardRepository) private boardRepository: BoardRepository) {}
 
+    async getAllBoards(): Promise<Board[]> {
+        return this.boardRepository.find();
+    }
+
     async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
         return this.boardRepository.createBoard(createBoardDto);
     }
