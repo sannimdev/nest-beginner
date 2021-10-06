@@ -177,3 +177,13 @@ npm install pg typeorm @nestjs/typeorm --save
 -   remove: 존재하는 아이템을 remove를 이용해서 지운다. 그러나 존재하지 않으면 오류가 발생한다.(404 Error)
 -   delete: 만약 아이템이 존재하면 지우고 존재하지 않으면 아무런 영향이 없음
 -   remove를 이용하면 아이템을 지울 때 두 번의 데이터베이스를 이용해야 하므로 (아이템 유무 + 지우기) 비효율적이므로 데이터베이스를 한 번만 접근해도 되는 delete 메서드를 사용할 것이다. ([참고](https://github.com/typeorm/typeorm/blob/master/docs/repository-api.md))
+
+## 비밀번호 암호화
+
+```
+npm install bcryptjs --save
+```
+
+```js
+import * as bcrypt from 'bcryptjs';
+```
