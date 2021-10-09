@@ -187,3 +187,13 @@ npm install bcryptjs --save
 ```js
 import * as bcrypt from 'bcryptjs';
 ```
+
+## JWT
+
+Json Web Token의 약자로 당사자 간에 정보를 JSON 개체로 안전하게 전송하기 위한 컴팩트하고 독립적이 방식을 정의하는 개방형 표준.
+이 정보는 디지털 서명이 되어 있으므로 확인하고 신뢰할 수 있다.
+간단하게 이야기하면 정보를 안전하게 전달할 때나 유저의 권한을 체크할 때 체크를 하기 위해서 사용하는 데 유용한 모듈이다.
+
+-   Header
+-   Payload
+-   Verify Signature
