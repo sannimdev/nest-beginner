@@ -209,6 +209,82 @@ Json Web Token의 약자로 당사자 간에 정보를 JSON 개체로 안전하�
 
 ### 절차
 
--   유저 로그인 -> 토큰 생성 -> 토큰 보관
+-   유저 로그인 → 토큰 생성 → 토큰 보관
 -   서버에서는 클라이언트가 요청하여 같이 온 header와 payload를 가져오고 서버 안에 가지고 있는 Secret을 이용하여 서명을 다시 생성한다.
     그래서 그 둘이 일치하면 통과된다.
+
+### 토큰 생성하기
+
+-   필요한 모듈 설치하기
+
+-   @nestjs/jwt
+    -   nestjs에서 jwt를 사용하기 위해 필요한 모듈
+-   @nestjs/passport
+    -   nestjs에서 passport를 사용하기 위해 필요한 모듈
+-   passport
+    -   passport 모듈
+-   passport-jwt
+    -   jwt 모듈
+
+```
+npm install @nestjs/jwt @nestjs/passport passport passport-jwt --save
+```
+
+### 애플리케이션에서 JWT 모듈 등록하기
+
+-   [JWT 토큰 실습](https://jwt.io/)
+
+1. auth 모듈 imports에 등록하기
+
+    - Secret
+        - 토큰을 만들 때 이용하는 Secret 텍스트 (아무 텍스트나 넣어도 된다)
+    - ExpiresIn
+        - 정해진 시간 이후에는 토큰이 만료됨
+
+    ```js
+    @Module({
+        imports: [
+            JwtModule.register({
+                secret: 'Secret1234',
+                signOptions: {
+                    expiresIn: 60 * 60, // 1시간 이후 만료
+                },
+            }),
+            TypeOrmModule.forFeature([UserRepository]),
+        ],
+        controllers: [AuthController],
+        providers: [AuthService],
+    })
+    export class AuthModule {}
+    ```
+
+2. Passport 모듈을 애플리케이션에 등록하기
+
+```js
+@Module({
+    imports: [
+        PassportModule.register({ defaultStrategy: 'jwt' }),
+        JwtModule.register({
+            secret: 'Secret1234',
+            signOptions: {
+                expiresIn: 60 * 60, // 1시간 이후 만료
+            },
+        }),
+        TypeOrmModule.forFeature([UserRepository]),
+    ],
+    controllers: [AuthController],
+    providers: [AuthService],
+})
+export class AuthModule {}
+```
+
+3. 로그인 성공 시 JWT 이용하여 토큰 생성하기
+
+4. Service에서 SignIn 메서드에서 생성하면 된다.
+
+-   액세스 토큰 예시
+    ```json
+    {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhYWEiLCJpYXQiOjE2MzM5NDM3ODEsImV4cCI6MTYzMzk0NzM4MX0.EboyVxUbOuNGHNyzRCe5-vVrCctR62P8aEfnQq20H1A"
+    }
+    ```
