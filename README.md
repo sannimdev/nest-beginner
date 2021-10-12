@@ -225,6 +225,9 @@ Json Web Token의 약자로 당사자 간에 정보를 JSON 개체로 안전하�
     -   passport 모듈
 -   passport-jwt
     -   jwt 모듈
+    -   Strategy가 들어 있음
+-   @types/passport-jwt
+    -   jwt 모듈에 관한 타입을 정의한 모듈(for using typescript)
 
 ```
 npm install @nestjs/jwt @nestjs/passport passport passport-jwt --save
@@ -288,3 +291,29 @@ export class AuthModule {}
         "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhYWEiLCJpYXQiOjE2MzM5NDM3ODEsImV4cCI6MTYzMzk0NzM4MX0.EboyVxUbOuNGHNyzRCe5-vVrCctR62P8aEfnQq20H1A"
     }
     ```
+
+### Passport, Jwt 이용해서 토큰 인증 후 유저 정보 가져오기
+
+#### Passport의 역할
+
+1. 유저가 요청할 때 요청 안에 있는 Header에 토큰을 넣어서 요청했는데 요청 안에 Payload가 있음.
+2. 그리고 그 payload 안에 유저 이름을 넣었다.
+3. 해당 토큰이 유효한지는 secret text를 이용하여 알아내면 payload 안에 유저 이름을 이용해서 데이터베이스 안에 있는 유저 이름에 해당하는 유저 정보를 모두 가져올 수 있다.
+
+## Middlewares
+
+-   NestJS에는 여러가지 미들웨어가 있다.
+    -   Pipes
+        -   유효성 체크를 하거나 페이로드 변환
+    -   Filters
+        -   오류 처리 미들웨어
+    -   Guards
+        -   인증 미들웨어
+    -   Interceptors
+        -   응답 매핑 및 캐시 관리와 함께 요청 로깅과 같은 전후 미들웨어
+
+### 미들웨어가 불리는 순서
+
+middleware → guard →
+interceptor (before) → pipe → controller → service → controller →
+interceptor(after) → filter(if applicable) → client
