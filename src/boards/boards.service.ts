@@ -10,8 +10,13 @@ import { CreateBoardDto } from './dto/create-board.dto';
 export class BoardsService {
     constructor(@InjectRepository(BoardRepository) private boardRepository: BoardRepository) {}
 
-    async getAllBoards(): Promise<Board[]> {
-        return this.boardRepository.find();
+    async getAllBoards(user: User): Promise<Board[]> {
+        // 자기가 작성한 글만 가져오는 것으로 변경하기
+        const query = this.boardRepository.createQueryBuilder('board');
+        query.where('board.userId = :id', { id: user.id });
+
+        const boards = await query.getMany();
+        return boards;
     }
 
     async createBoard(createBoardDto: CreateBoardDto, user: User): Promise<Board> {
