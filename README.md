@@ -335,3 +335,35 @@ interceptor(after) → filter(if applicable) → client
 -   Verbose: 응용 프로그램의 동작에 대한 통찰력을 제공하는 정보
 
 ### built-in된 logger 클래스를 사용하기
+
+## 설정
+
+소스 코드 안에서 어떠한 코드들은 개발 환경이나 운영 환경에 따라 다르게 코드를 넣어야 할 때가 있다.
+그중 남들에게 노출되지 않아야 하는 코드가 있다. 이러한 코드는 설정파일을 따로 만들어서 보관해야 한다.
+
+### Codebase VS Exnvironment Variables(환경 변수)
+
+설정할 때 여러 가지 형식으로 사용할 수 있다.
+xml, json, yaml 같은 경우에는 Codebase에 해당한다.
+그리고 다른 방법은 환경 변수로 할 수 있다. 주로 이 둘을 나눠서 하는 이유는 비밀번호와 API Key와 같은 남들에게 노출되면 안 되는 정보를 주로 환경 변수를 이용하여 처리한다.
+
+-   Codebase: 일반적으로 Port와 같이 노출되어도 상관없는 정보
+-   환경 변수: 남들에게 노출되지 말아야 하는 중요한 정보
+
+### 설정하기 위해 필요한 모듈
+
+```
+-- 윈도우만 설치
+npm install -g win-node-env
+-- 모든 OS에서 설치
+npm install config --save
+```
+
+### Config 모듈을 이용한 설정 파일 생성
+
+-   물론.... `.gitignore`로 설정을 해두어야겠지...
+
+1. 루트 디렉터리에 config라는 폴더를 만들고 그 폴더 안에 JSON이나 YAML 형식의 파일 만들기.
+    - config/default.yaml
+2. config 폴더 안에 default.yml, development.yml, production.yml 파일을 생성한다.
+    - 각 개발/운영 환경에서 사용될 환경변수를 각각 다르게 설정할 수도 있음.
