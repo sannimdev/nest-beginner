@@ -317,3 +317,9 @@ export class AuthModule {}
 middleware → guard →
 interceptor (before) → pipe → controller → service → controller →
 interceptor(after) → filter(if applicable) → client
+
+## 접근 제어
+
+### 글쓰기
+
+게시물 생성 요청 -> 헤더 안에 있는 토큰으로 유저 정보를 삽입 -> 유저 정보와 게시물 관계 형성하며 게시물 생성
